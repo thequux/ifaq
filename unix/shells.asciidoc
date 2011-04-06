@@ -1,0 +1,80 @@
+________________
+Hi guys, I have a question about shells, because I am studying them right
+now.
+
+There are three types of shells
+
+. C and TC shell
+. Bash
+. Korn Shell
+
+I know Bash is pretty popular, but did you get to use other ones? If so,
+where?
+
+Thanks +
+John Yoon
+________________
+
+A bit of a history lesson:
+
+In the beginning, there was a shell called the "operator shell".  It
+wasn't called that at the time, mind you; it was just called the
+"shell" because there was nothing else to confuse it with.  This shell
+was a very simple wrapper around fork and exec, and was not a
+particularly friendly shell for scripting.  Another person, this time
+named Stephen Bourne, decided to fix this, and wrote his own shell,
+the "bourne shell".  Because the operator shell was already installed
+as /bin/osh, Bourne decided that the only logical name for HIS shell
+was /bin/sh.  Now that there was a shell that was good for scripting,
+everybody started using it for scripting, and so it became difficult
+to modify for fear of compatibility problems.  So, a man named David
+Korn decided that the best solution was to write his own shell, and
+install it as /bin/ksh.  While the Korn shell worked, and was quite
+nice for interactive use, featuring such wonderful features as command
+line editing, it was a royal pain in the ass for scripting.
+
+Meanwhile, off in another part of the world, a couple of hackers at
+Berkeley decided that C was a rather nice language, and wouldn't it be
+nice to write scripts in a c-like syntax?  And so the C shell was
+born, introducing magical new features like command history.  Writing
+shell scripts in C syntax turned out to be extremely ill-advised, but
+there were already users, and some of them though that they liked it
+so much that they wrote the Tenex C shell, which introduced command
+completion, among other things.  While for a while it was the best
+interactive shell around (for a while at least), it was the only thing
+worse than csh for scripting.
+
+We shall now venture off to Boston, where a http://stallman.org[hacker
+with a very large beard] and even larger plan for world domination
+decided that the best way to solve the UNIX fragmentation problem that
+was popping up was to create his own unix, and release it for
+free.  (He was somewhat confused about the meaning of the word free,
+and decided that it meant "open source").  Unfortunately, all of the
+above shells were copyright AT&T and/or Berkeley, so he decided to
+make a copy of the Bourne shell, and called it the "Bourne Again
+shell", or "bash".  This was just the first of a line of Really Bad
+Puns (TM). Compared to everything else out there, bash was really
+nice: it had sane evaluation semantics, completion, command history,
+command line editing, and many more of the things that most people
+seem to expect out of a shell.  So, it became immensely popular, and
+often is installed as /bin/sh by people who did not understand that
+the Bourne shell was a very different shell indeed.
+
+The world became stable for a while, and shells stopped randomly
+popping into existence (or at least, gaining traction when they did).
+Until, of course, somebody decided that bash didn't have enough
+features, wrote a patch to add some, and then realized that his patch
+did not actually use any of the bash code and so it became known as
+the z shell, "z" standing for nothing in particular.  It has more
+features than Emacs, and even includes an FTP client as an example
+shell script.  It tends to be used by insufferable elitist clods like
+myself who feel that ZSH is the one true shell; nothing else competes
+with it and you're an idiot if you don't use it.
+
+There are two other shells that you should know about: http://ipython.scipy.org[IPython] and
+Zoidberg.  Zoidberg is built around the idea that perl is the duct tape
+that holds UNIX together, and wouldn't it be nice to use
+interactively?  IPython is the same idea, but with python and somewhat
+less shell-like default behavior.
+
+--tq
