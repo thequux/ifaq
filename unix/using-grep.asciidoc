@@ -14,12 +14,12 @@ __________________
 
 No, not directly. What you can do, though, is combine Grep with other tools; the idea is to turn each paragraph into a line, with no lines between paragraphs:
 
-[source,shell]
-cat file | fmt -w 1000000 | grep SQL | sed -e 's/$/\n/' | fmt
+// \[source,shell]
+    cat file | fmt -w 1000000 | grep SQL | sed -e 's/$/\n/' | fmt
 
 Broken down, that's:
 
-[source, shell]
+// \[source, shell]
 ----------------
 cat file |          # obvious
 fmt -w 1000000 |    # Reformat paragraphs so that lines are at most a million characters wide.
