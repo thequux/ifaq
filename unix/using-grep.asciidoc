@@ -1,0 +1,39 @@
+__________________
+On Wed, Apr 6, 2011 at 12:51 PM, xxxxxxxxxx <xxxxxxxxxx@gmail.com> wrote:
+
+hi dan,
+
+got a grep question +
+suppose a search for 'SQL' shows it is within a 6-7 line paragraph of status line items. +
+each 'paragraph' is separated by a double-space. +
+it would be great to search the document for occurrences of 'SQL' and display the entire 6-7 line paragraph wherein they occur, coz there's a neighboring line with a number to note down. +
+can grep return that?
+ 
+neil
+__________________
+
+No, not directly. What you can do, though, is combine Grep with other tools; the idea is to turn each paragraph into a line, with no lines between paragraphs:
+
+[source,shell]
+cat file | fmt -w 1000000 | grep SQL | sed -e 's/$/\n/' | fmt
+
+Broken down, that's:
+
+[source, shell]
+----------------
+cat file |          # obvious
+fmt -w 1000000 |    # Reformat paragraphs so that lines are at most a million characters wide.
+                    # This should get each paragraph onto one line. If not, the source text
+                    # should probably be taken out and shot.
+grep SQL |          # Obvious
+sed -e 's/$/\n/' |  # Add a newline to the end of every line; i.e., double space.
+                    # s/$/<something>/ is a common sed idiom to add something to the end of every line
+                    # s/^/<something>/ is the corresponding idiom for beginning-of-line
+fmt                 # Reformat into readable paragraphs.
+----------------
+
+In general, when faced with a problem like this, the approach is to combine other Unix tools to get things into and out of a format that can do what you want.
+ 
+It is unfortunate that Unix tools have been merging functionality in; there is a wonderful tool that comes with BSD called `rs`, for "reshape". It takes a bunch of lines of text, and reshapes them into columns. For example, `ls | rs` would columnify the output of ls.  People then rolled that functionality into ls, making it completely useless for other things one may want to columnify. See http://harmful.cat-v.org/cat-v/ for a better written screed.
+
+--tq
